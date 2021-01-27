@@ -1,6 +1,6 @@
-import {Component, Input, OnInit, Output} from '@angular/core';
-import {Post} from '../../models/model';
-import {EventEmitter} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Post} from '../../models/post';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-post',
@@ -11,17 +11,18 @@ export class PostComponent implements OnInit {
 
   @Input()
   post: Post;
-  @Output()
-  upPost = new EventEmitter();
 
-  constructor() {
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit(): void {
   }
 
-
-  getPost(post: Post): void {
-    this.upPost.emit(post);
+  goTo(): void {
+    this.router.navigate([this.post.id], {
+      relativeTo: this.activatedRoute,
+      state: this.post
+    });
   }
+
 }
