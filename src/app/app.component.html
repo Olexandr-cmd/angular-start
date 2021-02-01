@@ -1,1 +1,25 @@
-<app-cars></app-cars>
+<form [formGroup]="myForm" (ngSubmit)="action()">
+  <div>
+    <input [formControl]="name">
+    <div [classList]="['warning']"
+         *ngIf="name.errors?.required"
+    >
+      this is required input
+    </div>
+    <div [class]="['warning']"
+         *ngIf="!!name.errors?.minlength"
+    >
+      requiredLength - {{name.errors?.minlength?.requiredLength}}
+      actualLength - {{name.errors?.minlength?.actualLength}}
+    </div>
+    <div [class]="['warning']"
+        *ngIf="name.errors?.fuck"
+    >
+      {{name.errors?.msg}}
+    </div>
+  </div>
+  <div>
+    <input [formControl]="age">
+  </div>
+  <button>save</button>
+</form>
